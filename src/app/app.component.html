@@ -1,0 +1,78 @@
+<nav class="navbar">
+    <div
+        class="container-sm p-3 px-0 font-avega-italic border-bottom border-black d-sm-block d-md-inline-flex text-center">
+        <h6>IMC Online</h6>
+        <h6>DESARROLLO DE APLICACIONES WEB AVANZADO</h6>
+        <h6>GRUPO 02</h6>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="container-sm pt-5 px-0">
+        <div class="row row-cols-1 row-cols-md-2">
+            <div class="col">
+                <h1 class="font-avega-italic">Calcula tu masa corporal</h1>
+                <p class="pe-0 pe-md-5 pt-4 pb-2 font-courier-prime">
+                    Para calcular tu índice de masa corporal (IMC), necesitamos algunos datos básicos sobre tu peso y
+                    altura. El IMC es una medida que evalúa si tu peso está en un rango saludable en relación con tu
+                    altura. Con esta información, podemos determinar si estás en un peso adecuado, bajo peso, sobrepeso
+                    u obesidad. Proporcionar tu peso y altura nos permitirá calcular tu IMC y ofrecerte recomendaciones
+                    para mantener una buena salud.
+                </p>
+                <button class="btn-custom">
+                    <span class="button_top">Ir a calcular</span>
+                </button>
+            </div>
+            <div class="col text-center">
+                <img src="assets/image/banner-home.png" class="w-75" alt="image-banner.png">
+            </div>
+        </div>
+    </div>
+    <hr class="mt-5">
+    <div class="container-sm my-5">
+        <div class="row row-cols-1 row-cols-md-2 g-3">
+            <div class="col">
+                <form [formGroup]="form" (ngSubmit)="submit()"
+                    class="form p-4 bg-blue-custom d-flex flex-column gap-3 justify-content-center align-content-center rounded-3 border border-3 border-dark shadow-sm mx-auto"
+                    style="width: 310px;">
+                    <div class="title font-avega-italic mb-3 bg-transparent">
+                        <h4 class="m-0 bg-transparent">Bienvenido,</h4>
+                        <span class="font-courier-prime fst-italic bg-transparent" style="font-size: small">Ingrese los
+                            datos por favor</span>
+                    </div>
+                    <input class="input" id="input-file" type="file" formControlName="imagen"
+                        accept="image/png, image/jpeg, image/jpg" (change)="onFileSelected($event)">
+                    <input class="input" placeholder="Nombre" type="text" formControlName="nombre">
+                    <input class="input" placeholder="Apellido" type="text" formControlName="apellido">
+                    <input class="input" placeholder="Altura en centímetros" type="number" formControlName="altura">
+                    <input class="input" placeholder="Peso en kilos" type="number" formControlName="peso">
+                    <hr class="my-1">
+                    <button class="btn-custom w-100">
+                        <span class="button_top">Calcular</span>
+                    </button>
+                </form>
+            </div>
+            <div class="col">
+                <div class="card mx-auto p-3 bg-blue-custom border border-2 border-dark" style="width: 18rem;">
+                    <canvas #canva height="300" width="300" class="bg-dark rounded-2"></canvas>
+                    <div class="card-body bg-transparent p-0 pt-3">
+                        @if (paciente) {
+                        <h5 class="font-avega-italic bg-transparent">Informe</h5>
+                        <div class="card-text font-courier-prime my-3" style="font-size: smaller;">
+                            <p class="bg-blue-custom">
+                                Estimado
+                                <strong> {{paciente.nombre + ' '+ paciente.apellido}} </strong> dado que su peso es de
+                                <strong> {{paciente.peso + ' Libras'}} </strong> y su estatura de
+                                <strong> {{paciente.altura + ' Centimetros'}} </strong>,
+                                <strong class="text-danger"> {{paciente.resultado}} </strong>
+                            </p>
+                        </div>
+                        <button class="btn-custom w-100 mt-1" (click)="clean()">
+                            <span class="button_top">Limpiar</span>
+                        </button>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
